@@ -1,29 +1,38 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import ChatContext from "../../contexts/ChatContext";
 import { nanoid } from "nanoid";
+import { sendName } from "../../socketService";
+import styles from "./index.module.css";
 
 function JoinPage() {
+  const history = useHistory();
   const { name, setName } = useContext(ChatContext);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sendName(name);
+    console.log(name);
+    history.push("/chat");
+  };
+
   return (
-    <div className="joinGlobalContainer">
-      <div className="joinContainer">
-        <h1>GİRİŞ</h1>
-        <div>
+    <div className={styles.joinGlobalContainer}>
+      <div className={styles.joinContainer}>
+        <h1 className={styles.heading}>GİRİŞ</h1>
+        <form onSubmit={handleSubmit}>
           <input
             placeholder="İsim"
-            className="joinInput"
+            className={styles.joinInput}
             type="text"
-            onChange={(e) => setName(`${e.target.value}#${nanoid(5)}`)}
+            required
+            onChange={(e) => setName(`${e.target.value}_${nanoid(5)}`)}
           />
-        </div>
-        {console.log(name)}
-        <Link onClick={(e) => (!name ? e.preventDefault() : null)} to="/chat">
-          <button className="button" type="submit">
+
+          <button className={`${styles.button} ${styles.mt20}`} type="submit">
             Sohbete Katıl
           </button>
-        </Link>
+        </form>
       </div>
     </div>
   );

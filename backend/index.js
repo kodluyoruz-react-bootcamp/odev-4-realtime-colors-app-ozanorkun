@@ -8,6 +8,13 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("user", (name) => console.log(name));
+  socket.on("message", (message) =>
+    socket.broadcast.emit("recieve-message", message)
+  );
+
+  socket.on("disconnect", () => console.log("user disconnect"));
 });
 
 http.listen(3000, () => {

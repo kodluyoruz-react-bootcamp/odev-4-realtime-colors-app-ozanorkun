@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import JoinPage from "../JoinPage/JoinPage";
-import ChatPage from "../ChatPage/ChatPage";
+import JoinPage from "./JoinPage/JoinPage";
+import ChatPage from "./ChatPage/ChatPage";
 
 function PageRoute() {
   return (
