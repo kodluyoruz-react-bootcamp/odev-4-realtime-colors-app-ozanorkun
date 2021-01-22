@@ -17,13 +17,17 @@ function ChatInput() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <input
+          type="text"
           value={message}
           placeholder="Bir mesaj yazın..."
           onChange={(e) => setMessage(e.target.value)}
-          className={styles.ChatInputForm}
+          className={styles.input}
         />
+        <button className={styles.sendButton} onClick={handleSubmit}>
+          Gönder
+        </button>
       </form>
     </div>
   );

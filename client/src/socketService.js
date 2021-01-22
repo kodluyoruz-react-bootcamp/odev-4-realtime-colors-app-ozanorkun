@@ -8,6 +8,14 @@ export const initSocket = () => {
   });
 
   socket.on("connect", () => console.log("Connected"));
+
+  //socket.on("number-of-connection");
+};
+
+export const numberOfConnections = (cb) => {
+  socket.on("number-of-connections", (numberOfConnections) => {
+    cb(numberOfConnections);
+  });
 };
 
 export const sendMessage = (message) => {
