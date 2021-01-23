@@ -1,11 +1,17 @@
 import { useEffect, useContext } from "react";
-import { initSocket } from "../socketService";
+import {
+  initSocket,
+  getColor,
+  subscribeToMessage,
+  numberOfConnections,
+} from "../socketService";
 import PageRoute from "../components/PageRoute";
 import ChatContext from "../contexts/ChatContext";
-import { subscribeToMessage } from "../socketService";
 
 function Container() {
-  const { setMessages } = useContext(ChatContext);
+  const { setMessages, setNumberOfConnections, setColor } = useContext(
+    ChatContext
+  );
 
   useEffect(() => {
     initSocket();
@@ -14,8 +20,16 @@ function Container() {
       setMessages((oldChats) => [...oldChats, message]);
     });
 
+    numberOfConnections((numberOfConnections) => {
+      setNumberOfConnections(numberOfConnections);
+    });
+
+    getColor((color) => {
+      setColor(color);
+    });
+
     return () => {};
-  }, [setMessages]);
+  }, [setMessages, setNumberOfConnections, setColor]);
 
   return (
     <div>

@@ -8,14 +8,6 @@ export const initSocket = () => {
   });
 
   socket.on("connect", () => console.log("Connected"));
-
-  //socket.on("number-of-connection");
-};
-
-export const numberOfConnections = (cb) => {
-  socket.on("number-of-connections", (numberOfConnections) => {
-    cb(numberOfConnections);
-  });
 };
 
 export const sendMessage = (message) => {
@@ -26,10 +18,30 @@ export const sendName = (name) => {
   socket && socket.emit("user", name);
 };
 
+export const sendColor = (color) => {
+  socket && socket.emit("color", color);
+};
+
+export const numberOfConnections = (cb) => {
+  if (!socket) return true;
+
+  socket.on("number-of-connections", (numberOfConnections) => {
+    cb(numberOfConnections);
+  });
+};
+
 export const subscribeToMessage = (cb) => {
   if (!socket) return true;
 
   socket.on("recieve-message", (message) => {
     cb(message);
+  });
+};
+
+export const getColor = (cb) => {
+  if (!socket) return true;
+
+  socket.on("get-color", (color) => {
+    cb(color);
   });
 };

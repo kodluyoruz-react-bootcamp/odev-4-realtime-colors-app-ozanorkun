@@ -2,18 +2,18 @@ const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
-let numberOfConnections = 0;
+let numberOfConnections = -1;
 
 app.get("/", (req, res) => {
   res.sendFile("Hello Socket.io");
 });
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  //console.log("a user connected");
   numberOfConnections++;
+  io.emit("number-of-connections", numberOfConnections);
 
   socket.on("user", (name) => {
-    console.log(name);
     socket.broadcast.emit("name", name);
   });
 
@@ -21,13 +21,13 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("recieve-message", message)
   );
 
-  socket.on("disconnect", () => {
-    console.log("user disconnect");
-    numberOfConnections--;
-    socket.broadcast.emit("number-of-connections", numberOfConnections);
-  });
+  socket.on("color", (color) => socket.broadcast.emit("get-color", color));
 
-  socket.broadcast.emit("number-of-connections", numberOfConnections);
+  socket.on("disconnect", () => {
+    //console.log("user disconnect");
+    numberOfConnections--;
+    io.emit("number-of-connections", numberOfConnections);
+  });
 });
 
 http.listen(3000, () => {

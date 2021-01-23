@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 function ChatInput() {
   const [message, setMessage] = useState([]);
 
-  const { name, messages, setMessages } = useContext(ChatContext);
+  const { name, messages, setMessages, color } = useContext(ChatContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +25,11 @@ function ChatInput() {
           onChange={(e) => setMessage(e.target.value)}
           className={styles.input}
         />
-        <button className={styles.sendButton} onClick={handleSubmit}>
+        <button
+          style={{ backgroundColor: color }}
+          className={styles.sendButton}
+          onClick={handleSubmit}
+        >
           Gönder
         </button>
       </form>

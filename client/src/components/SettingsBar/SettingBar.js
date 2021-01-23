@@ -1,23 +1,42 @@
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import ChatContext from "../../contexts/ChatContext";
-import { numberOfConnections } from "../../socketService";
+import { sendColor } from "../../socketService";
 import styles from "./index.module.css";
-import gearIcon from "../../icons/gearIcon.png";
+import onlineIcon from "../../icons/onlineIcon.png";
 
 function SettingBar() {
-  const { setMessages, setNumberOfConnections } = useContext(ChatContext);
-  useEffect(() => {
-    numberOfConnections((number) => {
-      setNumberOfConnections(number);
-    });
-  }, [setMessages, setNumberOfConnections]);
+  const { numberOfConnections, setColor, color } = useContext(ChatContext);
+
+  const colorHandler = () => {
+    sendColor(color);
+  };
+
   return (
-    <div className={styles.infoBar}>
+    <div style={{ backgroundColor: color }} className={styles.infoBar}>
       <div className={styles.leftInnerContainer}>
-        <h5>{numberOfConnections} Kişi Çevrimiçi</h5>
+        {numberOfConnections ? (
+          <>
+            <img
+              className={styles.onlineIcon}
+              src={onlineIcon}
+              alt="online icon"
+            />
+            <h5> {numberOfConnections} Kişi Çevrimiçi</h5>
+          </>
+        ) : (
+          <h5>Çevrimiçi Kimse Yok</h5>
+        )}
       </div>
       <div className={styles.rightInnerContainer}>
-        <img src={gearIcon} alt="settings icon"></img>
+        <label htmlFor="colorPicker">Tema Rengi:</label>
+        <input
+          onChange={(e) => setColor(e.target.value)}
+          type="color"
+          id="colorPicker"
+          name="colorPicker"
+          value={color}
+        />
+        <button onClick={colorHandler}>Değiştir</button>
       </div>
     </div>
   );

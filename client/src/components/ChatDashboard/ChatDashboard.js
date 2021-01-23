@@ -9,7 +9,6 @@ function ChatDashboard() {
   const { messages } = useContext(ChatContext);
   return (
     <ScrollToBottom className={styles.messages}>
-      <UserActions></UserActions>
       {messages.map((item, key) => (
         <ChatMessage key={key} message={item.message} name={item.name} />
       ))}
