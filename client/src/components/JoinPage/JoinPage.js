@@ -12,7 +12,7 @@ function JoinPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     sendName(name);
-    console.log(name);
+    window.sessionStorage.setItem("myName", name);
     history.push("/chat");
   };
 
