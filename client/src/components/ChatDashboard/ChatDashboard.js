@@ -7,6 +7,9 @@ import styles from "./index.module.css";
 
 function ChatDashboard() {
   const { messages } = useContext(ChatContext);
+
+  console.log("gelenler:", messages);
+
   return (
     <ScrollToBottom className={styles.messages}>
       {messages.map((item, key) => (

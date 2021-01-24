@@ -2,6 +2,8 @@ const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
+const Messages = require("./libs/Messages");
+
 let numberOfConnections = -1;
 
 app.get("/", (req, res) => {
@@ -13,13 +15,16 @@ io.on("connection", (socket) => {
   numberOfConnections++;
   io.emit("number-of-connections", numberOfConnections);
 
+  Messages.list((data) => io.emit("message-list", data));
+
   socket.on("user", (name) => {
     socket.broadcast.emit("name", name);
   });
 
-  socket.on("message", (message) =>
-    socket.broadcast.emit("recieve-message", message)
-  );
+  socket.on("message", (messagePackage) => {
+    socket.broadcast.emit("recieve-message", messagePackage);
+    Messages.upsert(messagePackage);
+  });
 
   socket.on("color", (color) => socket.broadcast.emit("get-color", color));
 

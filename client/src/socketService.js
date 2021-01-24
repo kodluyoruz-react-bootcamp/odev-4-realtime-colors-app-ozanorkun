@@ -33,8 +33,9 @@ export const numberOfConnections = (cb) => {
 export const subscribeToMessage = (cb) => {
   if (!socket) return true;
 
-  socket.on("recieve-message", (message) => {
-    cb(message);
+  socket.on("recieve-message", (messagePackage) => {
+    console.log("mesaj paketi:", messagePackage);
+    cb(messagePackage);
   });
 };
 
@@ -43,5 +44,13 @@ export const getColor = (cb) => {
 
   socket.on("get-color", (color) => {
     cb(color);
+  });
+};
+
+export const subscribeInitialMessages = (cb) => {
+  if (!socket) return true;
+
+  socket.on("message-list", (data) => {
+    cb(data);
   });
 };

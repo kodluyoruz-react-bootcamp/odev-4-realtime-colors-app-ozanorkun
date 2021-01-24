@@ -3,6 +3,7 @@ import {
   initSocket,
   getColor,
   subscribeToMessage,
+  subscribeInitialMessages,
   numberOfConnections,
 } from "../socketService";
 import PageRoute from "../components/PageRoute";
@@ -18,6 +19,10 @@ function Container() {
 
     subscribeToMessage((message) => {
       setMessages((oldChats) => [...oldChats, message]);
+    });
+
+    subscribeInitialMessages((data) => {
+      setMessages(data);
     });
 
     numberOfConnections((numberOfConnections) => {
