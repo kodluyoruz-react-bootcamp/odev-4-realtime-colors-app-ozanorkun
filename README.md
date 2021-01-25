@@ -11,7 +11,7 @@
 * Heroku
 * Netlify
 
-Backend is located on **Heroku**, frontend is on **Netlify**. With **Redis**, past messages and usernames are stored.
+Back-end is located on **Heroku**, front-end is on **Netlify**. With **Redis**, past messages and usernames are stored.
 
 The number of active users in real time is displayed on the top left.
 
