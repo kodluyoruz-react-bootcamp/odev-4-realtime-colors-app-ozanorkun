@@ -9,10 +9,11 @@ function Messages() {
 module.exports = new Messages();
 
 Messages.prototype.upsert = function (messagePackage) {
+  let time = Date.now();
   this.client.hset(
     "messages",
     nanoid(5),
-    JSON.stringify({ messagePackage, when: Date.now() }),
+    JSON.stringify(_.assignIn(messagePackage, { when: time })),
     (err) => {
       if (err) {
         console.error(err);
@@ -34,6 +35,6 @@ Messages.prototype.list = function (callback) {
       messageList.push(JSON.parse(messagePackage[message]));
     }
 
-    return callback(messageList);
+    return callback(_.orderBy(messageList, "when", "asc"));
   });
 };
