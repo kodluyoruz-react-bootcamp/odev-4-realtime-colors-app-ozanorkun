@@ -1,14 +1,12 @@
 import ChatMessage from "../ChatMessage/ChatMessage";
 import { useContext } from "react";
 import ChatContext from "../../contexts/ChatContext";
-import UserActions from "../UserActions/UserActions";
+//import UserActions from "../UserActions/UserActions";
 import ScrollToBottom from "react-scroll-to-bottom";
 import styles from "./index.module.css";
 
 function ChatDashboard() {
   const { messages } = useContext(ChatContext);
-
-  console.log("gelenler:", messages);
 
   return (
     <ScrollToBottom className={styles.messages}>
