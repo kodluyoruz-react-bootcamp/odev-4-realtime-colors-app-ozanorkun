@@ -34,7 +34,7 @@ function SettingBar() {
           type="color"
           id="colorPicker"
           name="colorPicker"
-          value={color}
+          value={color || "#eeeeee"}
         />
 
         <button onClick={colorHandler}>Değiştir</button>

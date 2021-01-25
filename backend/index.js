@@ -1,7 +1,7 @@
 const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-let port = process.env.BACKEND_PORT || 3000;
+let port = 443 || 3000;
 
 const Messages = require("./libs/Messages");
 const Color = require("./libs/Color");
@@ -42,5 +42,5 @@ io.on("connection", (socket) => {
 });
 
 http.listen(port, () => {
-  console.log("listening on *:", process.env.BACKEND_PORT);
+  console.log("listening on *:", port);
 });
