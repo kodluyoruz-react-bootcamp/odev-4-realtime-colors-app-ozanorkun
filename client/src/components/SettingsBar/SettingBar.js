@@ -3,15 +3,12 @@ import ChatContext from "../../contexts/ChatContext";
 import { sendColor } from "../../socketService";
 import styles from "./index.module.css";
 import onlineIcon from "../../icons/onlineIcon.png";
-import { hexToRGB } from "../../lib/hexToRGB";
 
 function SettingBar() {
   const { numberOfConnections, setColor, color } = useContext(ChatContext);
 
   const colorHandler = () => {
     sendColor(color);
-
-    //console.log(`rgba(${+color.r},${+color.g},${+color.b},1)`);
   };
 
   return (
