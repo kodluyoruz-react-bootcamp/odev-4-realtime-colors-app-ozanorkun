@@ -4,18 +4,19 @@
 
 ### Technologies and Platforms
 
-* Context API
-* Socket.io
 * React.js
+* Context API
+* Node.js
+* Socket.io
 * Redis
 * Heroku
 * Netlify
 
 Back-end is located on **Heroku**, front-end is on **Netlify**. With **Redis**, past messages, usernames and chat page theme color are stored.
 
-The number of active users in real time is displayed on the top left.
+The number of active users is displayed in real time at the top left.
 
-When the theme color is changed from the top right, all users receive this change.
+When the theme color is changed from the top right, all users get this change.
 
 It has automatic **Scroll to Bottom** feature.
 
