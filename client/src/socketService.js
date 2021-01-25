@@ -3,7 +3,7 @@ import io from "socket.io-client";
 let socket;
 
 export const initSocket = () => {
-  socket = io("https://chatapp-with-colorpicker.herokuapp.com:443", {
+  socket = io(process.env.REACT_APP_BACKEND, {
     transports: ["websocket"],
   });
 
@@ -34,7 +34,6 @@ export const subscribeToMessage = (cb) => {
   if (!socket) return true;
 
   socket.on("recieve-message", (messagePackage) => {
-    console.log("mesaj paketi:", messagePackage);
     cb(messagePackage);
   });
 };
@@ -51,6 +50,14 @@ export const subscribeInitialMessages = (cb) => {
   if (!socket) return true;
 
   socket.on("message-list", (data) => {
+    cb(data);
+  });
+};
+
+export const subscribeInitialColor = (cb) => {
+  if (!socket) return true;
+
+  socket.on("changed-color", (data) => {
     cb(data);
   });
 };

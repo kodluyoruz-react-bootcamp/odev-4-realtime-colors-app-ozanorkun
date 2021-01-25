@@ -26,7 +26,9 @@ function ChatInput() {
           className={styles.input}
         />
         <button
-          style={{ backgroundColor: color }}
+          style={{
+            backgroundColor: color,
+          }}
           className={styles.sendButton}
           onClick={handleSubmit}
         >

@@ -16,5 +16,6 @@ export const hexToRGB = (h) => {
     b = "0x" + h[5] + h[6];
   }
 
+  //return "rgba(" + +r + "," + +g + "," + +b + ", 0.2)";
   return { r: r, g: g, b: b };
 };

@@ -5,6 +5,7 @@ import {
   subscribeToMessage,
   subscribeInitialMessages,
   numberOfConnections,
+  subscribeInitialColor,
 } from "../socketService";
 import PageRoute from "../components/PageRoute";
 import ChatContext from "../contexts/ChatContext";
@@ -23,6 +24,10 @@ function Container() {
 
     subscribeInitialMessages((data) => {
       setMessages(data);
+    });
+
+    subscribeInitialColor((color) => {
+      setColor(color);
     });
 
     numberOfConnections((numberOfConnections) => {

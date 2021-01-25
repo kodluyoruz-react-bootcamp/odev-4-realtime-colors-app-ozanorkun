@@ -1,9 +1,10 @@
 const app = require("express")();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-let port = process.env.PORT || 3000;
+let port = process.env.BACKEND_PORT || 3000;
 
 const Messages = require("./libs/Messages");
+const Color = require("./libs/Color");
 
 let numberOfConnections = -1;
 
@@ -17,6 +18,7 @@ io.on("connection", (socket) => {
   io.emit("number-of-connections", numberOfConnections);
 
   Messages.list((data) => io.emit("message-list", data));
+  Color.list((color) => io.emit("changed-color", color));
 
   socket.on("user", (name) => {
     socket.broadcast.emit("name", name);
@@ -27,7 +29,10 @@ io.on("connection", (socket) => {
     Messages.upsert(messagePackage);
   });
 
-  socket.on("color", (color) => socket.broadcast.emit("get-color", color));
+  socket.on("color", (color) => {
+    socket.broadcast.emit("get-color", color);
+    Color.upsert(color);
+  });
 
   socket.on("disconnect", () => {
     //console.log("user disconnect");
@@ -37,5 +42,5 @@ io.on("connection", (socket) => {
 });
 
 http.listen(port, () => {
-  console.log("listening on *:", process.env.PORT);
+  console.log("listening on *:", process.env.BACKEND_PORT);
 });

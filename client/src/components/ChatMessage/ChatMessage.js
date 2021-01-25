@@ -8,7 +8,12 @@ function ChatMessage({ message, name }) {
   return name === window.sessionStorage.getItem("myName") ? (
     <div className={[styles.messageContainer, styles.justifyEnd].join(" ")}>
       <p className={[styles.sentText, styles.pr10].join(" ")}>{name}</p>
-      <div style={{ backgroundColor: color }} className={styles.messageBox}>
+      <div
+        style={{
+          backgroundColor: color,
+        }}
+        className={styles.messageBox}
+      >
         <p className={[styles.messageText, styles.colorWhite].join(" ")}>
           {message}
         </p>
