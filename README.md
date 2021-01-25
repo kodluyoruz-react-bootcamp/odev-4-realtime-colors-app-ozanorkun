@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/01e87b83-d4c5-481a-aed8-3d39e3ab9598/deploy-status)](https://app.netlify.com/sites/chatapp-with-colorpicker/deploys)
 
-[LIVE LINK](chatapp-with-colorpicker.netlify.app)
+[LIVE LINK](https://chatapp-with-colorpicker.netlify.app)
 
 ### Technologies and Platforms
 
