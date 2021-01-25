@@ -12,7 +12,7 @@ Messages.prototype.upsert = function (messagePackage) {
   this.client.hset(
     "messages",
     nanoid(5),
-    JSON.stringify(messagePackage),
+    JSON.stringify({ messagePackage, when: Date.now() }),
     (err) => {
       if (err) {
         console.error(err);
